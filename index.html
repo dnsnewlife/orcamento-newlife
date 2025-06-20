@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Life Consultoria - Orçamento</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            background-color: #001f3f;
+            color: white;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+            color: #FFD700;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+        h1 {
+            color: white;
+            text-align: center;
+            margin: 10px 0 0;
+            font-size: 22px;
+            font-weight: 500;
+        }
+        .form-group {
+            margin-bottom: 22px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #001f3f;
+        }
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 15px;
+            transition: border 0.3s;
+        }
+        input[type="text"]:focus,
+        input[type="number"]:focus {
+            border-color: #001f3f;
+            outline: none;
+        }
+        button {
+            background-color: #001f3f;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin-right: 10px;
+        }
+        button:hover {
+            background-color: #003366;
+            transform: translateY(-2px);
+        }
+        .btn-yellow {
+            background-color: #FFD700;
+            color: #001f3f;
+        }
+        .btn-yellow:hover {
+            background-color: #e6c200;
+        }
+        .hidden {
+            display: none;
+        }
+        .result-card {
+            border: 1px solid #e0e0e0;
+            padding: 25px;
+            border-radius: 8px;
+            margin-top: 20px;
+            background-color: #f9f9f9;
+        }
+        .highlight {
+            font-weight: bold;
+            color: #001f3f;
+            background-color: #FFD700;
+            padding: 12px;
+            border-radius: 5px;
+            text-align: center;
+            margin: 25px 0;
+            font-size: 17px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+        }
+        th {
+            background-color: #f2f2f2;
+            color: #001f3f;
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        td {
+            padding: 12px;
+            border: 1px solid #ddd;
+        }
+        tr:nth-child(even) {
+            background-color: #f8f8f8;
+        }
+        .back-btn {
+            background-color: #6c757d;
+        }
+        .back-btn:hover {
+            background-color: #5a6268;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #6c757d;
+            font-size: 14px;
+        }
+        @media print {
+            button {
+                display: none;
+            }
+            .header {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Página 1 - Coleta de Dados -->
+        <div id="page1">
+            <div class="header">
+                <div class="logo">NEW LIFE CONSULTORIA</div>
+                <h1>Orçamento para Limpeza de Nome</h1>
+            </div>
+            
+            <div class="form-group">
+                <label for="nome">Nome Completo:</label>
+                <input type="text" id="nome" required placeholder="Digite seu nome completo">
+            </div>
+            
+            <div class="form-group">
+                <label for="cpf">CPF:</label>
+                <input type="text" id="cpf" required placeholder="Digite seu CPF">
+            </div>
+            
+            <div class="form-group">
+                <label for="valorDivida">Valor Total das Dívidas (R$):</label>
+                <input type="number" id="valorDivida" min="0" step="0.01" required placeholder="Digite o valor total">
+            </div>
+            
+            <div style="text-align: center;">
+                <button id="avancarBtn">Avançar</button>
+            </div>
+        </div>
+        
+        <!-- Página 2 - Resultado do Orçamento -->
+        <div id="page2" class="hidden">
+            <div class="header">
+                <div class="logo">NEW LIFE CONSULTORIA</div>
+                <h1>Orçamento para Limpeza de Nome</h1>
+            </div>
+            
+            <div class="result-card">
+                <h2 style="color: #001f3f; border-bottom: 2px solid #FFD700; padding-bottom: 10px;">Dados do Cliente</h2>
+                <p><strong>Nome:</strong> <span id="resultNome"></span></p>
+                <p><strong>CPF:</strong> <span id="resultCpf"></span></p>
+                <p><strong>Valor das Dívidas:</strong> R$ <span id="resultDivida"></span></p>
+                
+                <h2 style="color: #001f3f; border-bottom: 2px solid #FFD700; padding-bottom: 10px; margin-top: 30px;">Proposta Comercial</h2>
+                <p>Com base no valor das suas dívidas, oferecemos o seguinte plano para limpeza de seu nome:</p>
+                
+                <div class="highlight">
+                    Valor do Processo: <span id="valorProcessoFormatado"></span>
+                </div>
+                
+                <table>
+                    <tr>
+                        <th>Valor Original</th>
+                        <th>Parcelamento</th>
+                        <th>Valor da Parcela</th>
+                        <th>À vista (10% desconto)</th>
+                    </tr>
+                    <tr>
+                        <td>R$ <span id="valorOriginal"></span></td>
+                        <td><span id="parcelas"></span>x</td>
+                        <td>R$ <span id="valorParcela"></span></td>
+                        <td>R$ <span id="valorAvista"></span></td>
+                    </tr>
+                </table>
+                
+                <p style="text-align: center; margin-top: 25px; font-style: italic;">
+                    Este orçamento tem validade de 7 dias a partir da data de emissão.
+                </p>
+            </div>
+            
+            <div style="text-align: center; margin-top: 30px;">
+                <button class="back-btn" id="voltarBtn">Voltar</button>
+                <button class="btn-yellow" id="imprimirBtn">Imprimir Orçamento</button>
+            </div>
+            
+            <div class="footer">
+                New Life Consultoria © 2025 | CNPJ: 46.080.031/0001-09
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Função para formatar valores monetários
+        function formatMoney(value) {
+            return value.toFixed(2).replace('.', ',').replace(/(\d)(?=(\d{3})+\,)/g, '$1.');
+        }
+
+        document.getElementById('avancarBtn').addEventListener('click', function() {
+            // Validar campos
+            const nome = document.getElementById('nome').value.trim();
+            const cpf = document.getElementById('cpf').value.trim();
+            const valorDivida = parseFloat(document.getElementById('valorDivida').value);
+            
+            if (!nome || !cpf || isNaN(valorDivida) || valorDivida <= 0) {
+                alert('Por favor, preencha todos os campos corretamente.');
+                return;
+            }
+            
+            // Calcular orçamento conforme tabela fornecida
+            let valorOriginal, parcelas, valorParcela, valorAvista;
+            
+            if (valorDivida <= 25000) {
+                valorOriginal = 1500;
+                parcelas = 3;
+                valorParcela = 500;
+                valorAvista = 1350; // 1500 com 10% desconto
+            } else if (valorDivida <= 50000) {
+                valorOriginal = 1800;
+                parcelas = 3;
+                valorParcela = 600;
+                valorAvista = 1620; // 1800 com 10% desconto
+            } else if (valorDivida <= 80000) {
+                valorOriginal = 2100;
+                parcelas = 3;
+                valorParcela = 700;
+                valorAvista = 1890; // 2100 com 10% desconto
+            } else if (valorDivida <= 120000) {
+                valorOriginal = 2400;
+                parcelas = 4;
+                valorParcela = 600;
+                valorAvista = 2160; // 2400 com 10% desconto
+            } else {
+                valorOriginal = 2700;
+                parcelas = 4;
+                valorParcela = 675;
+                valorAvista = 2430; // 2700 com 10% desconto
+            }
+            
+            // Preencher resultados
+            document.getElementById('resultNome').textContent = nome;
+            document.getElementById('resultCpf').textContent = cpf;
+            document.getElementById('resultDivida').textContent = formatMoney(valorDivida);
+            document.getElementById('valorProcessoFormatado').textContent = `R$ ${formatMoney(valorOriginal + 600)} por R$ ${formatMoney(valorOriginal)}`;
+            document.getElementById('valorOriginal').textContent = formatMoney(valorOriginal);
+            document.getElementById('parcelas').textContent = parcelas;
+            document.getElementById('valorParcela').textContent = formatMoney(valorParcela);
+            document.getElementById('valorAvista').textContent = formatMoney(valorAvista);
+            
+            // Mostrar página 2
+            document.getElementById('page1').classList.add('hidden');
+            document.getElementById('page2').classList.remove('hidden');
+        });
+        
+        document.getElementById('voltarBtn').addEventListener('click', function() {
+            document.getElementById('page2').classList.add('hidden');
+            document.getElementById('page1').classList.remove('hidden');
+        });
+        
+        document.getElementById('imprimirBtn').addEventListener('click', function() {
+            window.print();
+        });
+    </script>
+</body>
+</html>

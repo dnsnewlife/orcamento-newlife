@@ -5,52 +5,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>New Life Consultoria - Orçamento</title>
     <style>
+        * {
+            box-sizing: border-box;
+        }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             margin: 0;
-            padding: 20px;
+            padding: 15px;
             background-color: #f8f9fa;
             color: #333;
+            -webkit-text-size-adjust: 100%;
         }
         .container {
+            width: 100%;
             max-width: 800px;
             margin: 0 auto;
             background: white;
-            padding: 30px;
+            padding: 20px;
             border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
         .header {
             background-color: #001f3f;
             color: white;
-            padding: 25px;
+            padding: 20px 15px;
             border-radius: 8px;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             text-align: center;
         }
         .logo {
-            font-size: 26px;
+            font-size: clamp(20px, 6vw, 26px);
             font-weight: bold;
             color: #FFD700;
-            margin-bottom: 10px;
-            letter-spacing: 1px;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
         }
         h1 {
             color: white;
             text-align: center;
-            margin: 10px 0 0;
-            font-size: 22px;
+            margin: 8px 0 0;
+            font-size: clamp(18px, 5vw, 22px);
             font-weight: 500;
         }
         .form-group {
-            margin-bottom: 22px;
+            margin-bottom: 18px;
         }
         label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             font-weight: 600;
             color: #001f3f;
+            font-size: 15px;
         }
         input[type="text"],
         input[type="number"] {
@@ -58,7 +64,6 @@
             padding: 12px;
             border: 1px solid #ddd;
             border-radius: 4px;
-            box-sizing: border-box;
             font-size: 15px;
             transition: border 0.3s;
         }
@@ -67,17 +72,25 @@
             border-color: #001f3f;
             outline: none;
         }
+        .btn-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
         button {
             background-color: #001f3f;
             color: white;
             border: none;
-            padding: 12px 25px;
+            padding: 12px 20px;
             border-radius: 4px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 600;
             transition: all 0.3s;
-            margin-right: 10px;
+            flex: 1 1 120px;
+            min-width: 120px;
         }
         button:hover {
             background-color: #003366;
@@ -95,9 +108,9 @@
         }
         .result-card {
             border: 1px solid #e0e0e0;
-            padding: 25px;
+            padding: 18px;
             border-radius: 8px;
-            margin-top: 20px;
+            margin-top: 15px;
             background-color: #f9f9f9;
         }
         .highlight {
@@ -107,24 +120,28 @@
             padding: 12px;
             border-radius: 5px;
             text-align: center;
-            margin: 25px 0;
-            font-size: 17px;
+            margin: 20px 0;
+            font-size: 16px;
+            word-break: break-word;
         }
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 25px 0;
+            margin: 20px 0;
+            font-size: 14px;
         }
         th {
             background-color: #f2f2f2;
             color: #001f3f;
-            padding: 12px;
+            padding: 10px;
             text-align: left;
             border: 1px solid #ddd;
+            font-size: 14px;
         }
         td {
-            padding: 12px;
+            padding: 10px;
             border: 1px solid #ddd;
+            font-size: 14px;
         }
         tr:nth-child(even) {
             background-color: #f8f8f8;
@@ -137,17 +154,67 @@
         }
         .footer {
             text-align: center;
-            margin-top: 30px;
+            margin-top: 25px;
             color: #6c757d;
-            font-size: 14px;
+            font-size: 13px;
+            line-height: 1.4;
         }
+        
+        /* Responsividade para tabelas em mobile */
+        @media (max-width: 600px) {
+            table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+            
+            .header {
+                padding: 15px 10px;
+            }
+            
+            .logo {
+                font-size: 22px;
+            }
+            
+            h1 {
+                font-size: 18px;
+            }
+            
+            .result-card {
+                padding: 15px;
+            }
+            
+            .highlight {
+                padding: 10px;
+                font-size: 15px;
+            }
+            
+            button {
+                padding: 10px 15px;
+                font-size: 14px;
+                min-width: 100px;
+            }
+        }
+        
         @media print {
+            body {
+                padding: 0;
+                font-size: 12pt;
+            }
+            .container {
+                box-shadow: none;
+                padding: 10px;
+            }
             button {
                 display: none;
             }
             .header {
                 -webkit-print-color-adjust: exact;
                 print-color-adjust: exact;
+                padding: 15px;
+            }
+            table {
+                font-size: 10pt;
             }
         }
     </style>
@@ -176,7 +243,7 @@
                 <input type="number" id="valorDivida" min="0" step="0.01" required placeholder="Digite o valor total">
             </div>
             
-            <div style="text-align: center;">
+            <div class="btn-container">
                 <button id="avancarBtn">Avançar</button>
             </div>
         </div>
@@ -189,45 +256,48 @@
             </div>
             
             <div class="result-card">
-                <h2 style="color: #001f3f; border-bottom: 2px solid #FFD700; padding-bottom: 10px;">Dados do Cliente</h2>
+                <h2 style="color: #001f3f; border-bottom: 2px solid #FFD700; padding-bottom: 8px; font-size: 18px;">Dados do Cliente</h2>
                 <p><strong>Nome:</strong> <span id="resultNome"></span></p>
                 <p><strong>CPF:</strong> <span id="resultCpf"></span></p>
                 <p><strong>Valor das Dívidas:</strong> R$ <span id="resultDivida"></span></p>
                 
-                <h2 style="color: #001f3f; border-bottom: 2px solid #FFD700; padding-bottom: 10px; margin-top: 30px;">Proposta Comercial</h2>
+                <h2 style="color: #001f3f; border-bottom: 2px solid #FFD700; padding-bottom: 8px; margin-top: 25px; font-size: 18px;">Proposta Comercial</h2>
                 <p>Com base no valor das suas dívidas, oferecemos o seguinte plano para limpeza de seu nome:</p>
                 
                 <div class="highlight">
                     Valor do Processo: <span id="valorProcessoFormatado"></span>
                 </div>
                 
-                <table>
-                    <tr>
-                        <th>Valor Original</th>
-                        <th>Parcelamento</th>
-                        <th>Valor da Parcela</th>
-                        <th>À vista (10% desconto)</th>
-                    </tr>
-                    <tr>
-                        <td>R$ <span id="valorOriginal"></span></td>
-                        <td><span id="parcelas"></span>x</td>
-                        <td>R$ <span id="valorParcela"></span></td>
-                        <td>R$ <span id="valorAvista"></span></td>
-                    </tr>
-                </table>
+                <div style="overflow-x: auto;">
+                    <table>
+                        <tr>
+                            <th>Valor Original</th>
+                            <th>Parcelamento</th>
+                            <th>Valor da Parcela</th>
+                            <th>À vista (10% desconto)</th>
+                        </tr>
+                        <tr>
+                            <td>R$ <span id="valorOriginal"></span></td>
+                            <td><span id="parcelas"></span>x</td>
+                            <td>R$ <span id="valorParcela"></span></td>
+                            <td>R$ <span id="valorAvista"></span></td>
+                        </tr>
+                    </table>
+                </div>
                 
-                <p style="text-align: center; margin-top: 25px; font-style: italic;">
+                <p style="text-align: center; margin-top: 20px; font-style: italic; font-size: 14px;">
                     Este orçamento tem validade de 7 dias a partir da data de emissão.
                 </p>
             </div>
             
-            <div style="text-align: center; margin-top: 30px;">
+            <div class="btn-container">
                 <button class="back-btn" id="voltarBtn">Voltar</button>
-                <button class="btn-yellow" id="imprimirBtn">Imprimir Orçamento</button>
+                <button class="btn-yellow" id="imprimirBtn">Imprimir</button>
             </div>
             
             <div class="footer">
-                New Life Consultoria © 2025 | CNPJ: 46.080.031/0001-09
+                New Life Consultoria © 2025<br>
+                CNPJ: 46.080.031/0001-09
             </div>
         </div>
     </div>
